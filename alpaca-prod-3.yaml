@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpaca-prod-4
+  labels:
+    app: alpaca-prod-3-label
+    ver: "3"
+  namespace: default
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: alpaca-prod-3-label-template
+  template:
+    metadata:
+      labels:
+        app: alpaca-prod-3-label-template
+    spec:
+      containers:
+        - image: gcr.io/kuar-demo/kuard-amd64:blue
+          name: kuard-amd
+          resources:
+            requests:
+              cpu: '250M'
+              memory: '128Mi'
+            limits:
+              cpu: '1000M'
+              memory: '256Mi'
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthy
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            periodSeconds: 4
+            failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 2
+            timeoutSeconds: 5
+            failureThreshold: 2
+            successThreshold: 1

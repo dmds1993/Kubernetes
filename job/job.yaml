@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sorteio
+spec:
+  template:
+    spec:
+      containers:
+        - name: sorteio
+          image: kubedevio/sorteio:v1
+          args: ["-c", "2", "-m", "3"]
+      restartPolicy: Never
+  backoffLimit: 40
+  completions: 2
+  parallelism: 2

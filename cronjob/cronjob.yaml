@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-sorteio
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: sorteio
+              image: kubedevio/sorteio:v1
+              args: ["-c", "2", "-m", "3"]
+          restartPolicy: Never
+      completions: 2
+      backoffLimit: 20
+      parallelism: 2
+  schedule: "*/3 * * * *"
+  concurrencyPolicy: Forbid

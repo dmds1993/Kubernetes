@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alpaca-prod-4
+  name: alpaca-prod
   labels:
-    app: alpaca-prod-3-label
+    app: alpaca-prod-label
     ver: "3"
   namespace: default
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: alpaca-prod-3-label-template
+      app: alpaca-prod-label-template
   template:
     metadata:
       labels:
-        app: alpaca-prod-3-label-template
+        app: alpaca-prod-label-template
     spec:
       containers:
         - image: gcr.io/kuar-demo/kuard-amd64:blue

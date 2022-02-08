@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: alpaca-prod-replicaset
+  labels:
+    app: alpaca-prod-replicaset
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: alpaca-pod
+  template:
+    metadata:
+      name: alpaca-pod
+      labels:
+        app: alpaca-pod
+    spec:
+      containers:
+        - image: gcr.io/kuar-demo/kuard-amd64:blue
+          name: kuard-conatiner
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              cpu: '125M'
+              memory: '128Mi'
+            limits:
+              cpu: '1000M'
+              memory: '512Mi'
+          livenessProbe:
+            httpGet:
+              path: /healty
+              port: 8080
+            initialDelaySeconds: 5
+            timeoutSeconds: 7
+            periodSeconds: 2
+            failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 2
+            timeoutSeconds: 5
+            failureThreshold: 2
+            successThreshold: 1

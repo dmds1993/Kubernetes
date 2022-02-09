@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-api-core
+spec:
+  selector:
+    app: web-api-core-v1
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80

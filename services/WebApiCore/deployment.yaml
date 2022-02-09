@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-api-core
+  labels:
+    app: web-api-core-v1
+    env: prod
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: web-api-core
+  template:
+    metadata:
+      labels:
+        app: web-api-core
+    spec:
+      containers:
+        - image: ospereiras2020/web-api-core
+          name: web-api-core
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+          livenessProbe:
+            httpGet:
+              path: /healthcheck/healthy
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 8
+            periodSeconds: 2
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthcheck/ready
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 2
+            timeoutSeconds: 4
+            failureThreshold: 2
+            successThreshold: 1
+          resources: {}
+          

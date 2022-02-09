@@ -5,7 +5,7 @@ metadata:
   labels:
     app: alpaca-prod-replicaset
 spec:
-  replicas: 8
+  replicas: 2
   selector:
     matchLabels:
       app: alpaca-pod
@@ -24,11 +24,8 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: '50M'
+              cpu: '10M'
               memory: '128Mi'
-            limits:
-              cpu: '1000M'
-              memory: '512Mi'
           livenessProbe:
             httpGet:
               path: /healty

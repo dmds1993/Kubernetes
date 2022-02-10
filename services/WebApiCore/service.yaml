@@ -4,7 +4,7 @@ metadata:
   name: web-api-core
 spec:
   selector:
-    app: web-api-core-v1
+    app: web-api-core
   type: LoadBalancer
   ports:
     - port: 80

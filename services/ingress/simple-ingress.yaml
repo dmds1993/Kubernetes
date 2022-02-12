@@ -4,9 +4,10 @@ metadata:
   name: simple-ingress
 spec:
   rules:
-    - http:
+    - host: web-api-core.example.com
+      http:
         paths:
-          - path: /
+          - path: /weatherforecast
             pathType: Prefix
             backend:
               service:

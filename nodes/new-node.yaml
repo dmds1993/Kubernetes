@@ -1,0 +1,6 @@
+kind: Node
+apiVersion: v1
+metadata: 
+  name: minikube-2
+  labels:
+    name: my-first-k8s-node

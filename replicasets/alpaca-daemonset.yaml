@@ -4,15 +4,24 @@ metadata:
   name: fluentd
   labels:
     app: fluentd
+    ssd: "true"
 spec:
+  replicas: 2
+  minReadySeconds: 100
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 10%
   selector:
     matchLabels:
       app: fluentd
   template:
     metadata:
       labels:
+        ssd: "true"
         app: fluentd
     spec:
+      nodeSelector:
+        ssd: "true"
       containers:
       - name: fluentd
         image: fluent/fluentd:v0.14.10

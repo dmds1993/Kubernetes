@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-job-service
+  labels:
+    app: cron-net-core
+spec:
+  schedule: "*/5 * * * *"
+  startingDeadlineSeconds: 20
+  concurrencyPolicy: Allow
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: job-application
+              image: ospereiras2020/job-service:v1.0
+          restartPolicy: OnFailure

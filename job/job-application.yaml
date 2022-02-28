@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-application
+  labels:
+    app: job-batch-application
+spec:
+  template:
+    spec:
+      containers:
+        - name: job-application
+          image: ospereiras2020/job-service:v1.0
+      restartPolicy: Never
+  backoffLimit: 40
+  completions: 4
+  parallelism: 9
+

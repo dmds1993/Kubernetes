@@ -11,5 +11,5 @@ spec:
           args: ["-c", "2", "-m", "3"]
       restartPolicy: Never
   backoffLimit: 40
-  completions: 2
-  parallelism: 2
+  completions: 1
+  parallelism: 1

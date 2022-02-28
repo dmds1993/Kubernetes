@@ -6,11 +6,15 @@ metadata:
     app: job-batch-application
 spec:
   template:
+    metadata:
+      name: job-application
+      labels:
+        chapter: jobs
     spec:
       containers:
         - name: job-application
           image: ospereiras2020/job-service:v1.0
-      restartPolicy: Never
+      restartPolicy: OnFailure
   backoffLimit: 40
   completions: 4
   parallelism: 9

@@ -5,14 +5,19 @@ metadata:
   labels:
     app: cron-net-core
 spec:
-  schedule: "*/5 * * * *"
-  startingDeadlineSeconds: 20
-  concurrencyPolicy: Allow
+  schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 460
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 30
       template:
+        metadata:
+          labels:
+            app: cron-job-netcorepod
         spec:
           containers:
             - name: job-application
               image: ospereiras2020/job-service:v1.0
-          restartPolicy: OnFailure
+          restartPolicy: Never
+      backoffLimit: 2

@@ -1,4 +1,8 @@
 {
-    "param1": "value1",
-    "param2": "value2"
+    "teste": {
+        "another-param": "value1",
+        "extra-param": "value2"
+    },
+    "another-param": "value1",
+    "extra-param": "value2"
 }

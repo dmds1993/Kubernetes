@@ -9,23 +9,29 @@ spec:
         imagePullPolicy: Always
         command:
             - "/kuard"
-            - "$(EXTRA_PARAM)"
+            - "$(ANOTHER_PARAM)"
         env:
           - name: ANOTHER_PARAM
             valueFrom:
               configMapKeyRef:
-                name: my-config
+                name: kuard-configmap
                 key: another-param
           - name: EXTRA_PARAM
             valueFrom:
               configMapKeyRef:
-                name: my-config
+                name: kuard-configmap
                 key: extra-param
         volumeMounts:
           - name: config-volume
             mountPath: /config
+          - name: kuard-tls
+            mountPath: /tls
+            readOnly: true
     volumes:
       - name: config-volume
         configMap:
-          name: my-config
+          name: kuard-configmap
+      - name: kuard-tls
+        secret:
+          secretName: kuard-tls
     restartPolicy: Never

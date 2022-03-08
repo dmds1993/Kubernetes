@@ -1,0 +1,10 @@
+configMapGenerator:
+- name: kuard-configmap
+  literals:  
+    - another-param=value2
+    - extra-param=value3
+  files:
+  - my-config.json
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-role
+  annotations: 
+    rbac.authorization.k8s.io/autoupdate: "false"
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs:
+      - "get"
+      - "list"
+      - "patch"
+      - "delete"
+      - "udpate"
+      - "watch"
+      - "create"

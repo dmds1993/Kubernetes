@@ -1,0 +1,18 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pods-service
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources:
+      - "pods"
+      - "services"
+    verbs: 
+      - "get"
+      - "list"
+      - "delete"
+      - "create"
+      - "patch"
+      - "update"
+      - "watch"

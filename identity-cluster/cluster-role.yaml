@@ -4,6 +4,10 @@ metadata:
   name: cluster-role
   annotations: 
     rbac.authorization.k8s.io/autoupdate: "false"
+aggregationRule:
+  clusterRoleSelectors:
+    - matchLabels:
+        rbac.authorization.k8s.io/aggregate-to-edit: "true"
 rules:
   - apiGroups: [""]
     resources: ["pods", "services"]

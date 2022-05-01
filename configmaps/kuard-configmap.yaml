@@ -3,5 +3,6 @@ kind: ConfigMap
 metadata:
   name: kuard-configmap
 data:
-  file: "./my-config.json"
+  another-param: "teste  criacao 4"
+  extra-param: "criacao teste2"
 
